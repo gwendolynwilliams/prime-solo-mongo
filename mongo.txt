@@ -1,0 +1,89 @@
+//1. Create a collection named orders.
+ db.createCollection('orders')
+
+
+//2. Insert at least 3 documents that represent an order. 
+db.orders.insert(
+    {
+        orderDate: new Date('April 27, 2003'),
+        orderTotal: 37.99,
+        lineItems: [
+            {
+                unitPrice: 14.99, 
+                quantity: 1, 
+                productName: 'lip balm'}, 
+            {
+                unitPrice: 3.25, 
+                quantity: 4, 
+                productName: 'gum'
+            }
+        ]
+     }     
+)
+
+db.orders.insert(
+    {
+        orderDate: new Date('January 22, 2016'),
+        orderTotal: 1279,
+        lineItems: [
+            {
+                unitPrice: 104.99, 
+                quantity: 44, 
+                productName: 'monitor'}
+        ]
+     }     
+)
+
+db.orders.insert(
+    {
+        orderDate: new Date('Mar 17, 2007'),
+        orderTotal: 438,
+        lineItems: [
+            {
+                unitPrice: 1.66, 
+                quantity: 2, 
+                productName: 'granola bar'},
+            {
+                unitPrice: 4.90, 
+                quantity: 7, 
+                productName: 'tea'},
+            {
+                unitPrice: .99, 
+                quantity: 1, 
+                productName: 'chocolate bar'}
+        ]
+     }     
+)
+
+
+//3. Find a single order document, any order document.
+db.getCollection('orders').find({'orderTotal': 37.99})
+
+
+//4. Find all orders and make them look pretty.
+db.getCollection('orders').find().pretty()
+
+
+//5. Find all orders with an orderDate that is prior to 1/1/2016.
+db.getCollection('orders').find(
+    { orderDate: 
+        {$lt: new Date("2016-01-01")}
+    }
+)
+
+
+//6. Find all orders with an orderDate that is after 1/1/2016.
+db.getCollection('orders').find(
+    { orderDate: 
+        {$gt: new Date("2016-01-01")}
+    }
+)
+
+
+//7. Find orders with lineItems that have a quantity that is less than 50, but greater than 5.
+db.orders.find(
+    {$and:[
+        {'lineItems.quantity': {$gte: 5}}, 
+        {'lineItems.quantity': {$lte: 50}}
+    ]}
+)
