@@ -19,9 +19,7 @@ db.orders.insert(
             }
         ]
      }     
-)
 
-db.orders.insert(
     {
         orderDate: new Date('January 22, 2016'),
         orderTotal: 1279,
@@ -32,9 +30,7 @@ db.orders.insert(
                 productName: 'monitor'}
         ]
      }     
-)
 
-db.orders.insert(
     {
         orderDate: new Date('Mar 17, 2007'),
         orderTotal: 438,
